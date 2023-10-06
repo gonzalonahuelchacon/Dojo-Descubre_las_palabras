@@ -3,6 +3,7 @@
 - Chanampa Macarena - 1B
 - Nahuel Ciolfi - 1B
 - Juan Arrúa - 1B
+- Gonzalo Chacón - 1B
 
 
 
