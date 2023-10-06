@@ -1,5 +1,7 @@
+import pygame 
 from data import lista_palabras
 import random
+
 
 
 def mezclar_palabra(letras:str):
@@ -75,7 +77,7 @@ letras = mezclar_palabra(key)
 letras_a_usar = letras_disponibles(letras)
 print(letras_a_usar)
 
-import pygame
+
 import sys
 
 pygame.init()
