@@ -1,5 +1,8 @@
 from data import lista_palabras
-import random
+import random, pygame
+
+NEGRO = (0, 0, 0)
+BLANCO = (255, 255, 255)
 
 def mezclar_palabra(letras:str):
     '''
@@ -64,3 +67,19 @@ def letras_disponibles(palabra):
 
 def pedir_letras(letras_disponible:set):
     letra = input("Ingrese letra: ")
+    
+def mostrar_botones(screen):
+    shuffle_button = pygame.draw.rect(screen, BLANCO, (700, 10, 80, 30))
+    clear_button = pygame.draw.rect(screen, BLANCO, (700, 50, 80, 30))
+    submit_button = pygame.draw.rect(screen, BLANCO, (700, 90, 80, 30))
+
+    font = pygame.font.Font(None, 24)
+    shuffle_text = font.render("Shuffle", True, NEGRO)
+    clear_text = font.render("Clear", True, NEGRO)
+    submit_text = font.render("Submit", True, NEGRO)
+
+    screen.blit(shuffle_text, (715, 15))
+    screen.blit(clear_text, (715, 55))
+    screen.blit(submit_text, (715, 95))
+
+    return shuffle_button, clear_button, submit_button
