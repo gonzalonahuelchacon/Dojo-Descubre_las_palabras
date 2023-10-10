@@ -4,6 +4,18 @@ import random, pygame
 NEGRO = (0, 0, 0)
 BLANCO = (255, 255, 255)
 
+width, height = 900, 600
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Descubre las palabras")
+
+texto = ""
+texto_color = NEGRO
+maximo = 10
+palabras_escritas = []
+running = True
+tiempo_restante = 9000
+acumulador=0
+
 def mezclar_palabra(letras:str):
     '''
     Mezcla las letras
@@ -83,3 +95,9 @@ def mostrar_botones(screen):
     screen.blit(submit_text, (715, 95))
 
     return shuffle_button, clear_button, submit_button
+
+key = elegir_key(crear_lista_claves(lista_palabras))
+letras = mezclar_palabra(key)
+letras_a_usar = letras_disponibles(letras)
+letras_str = str(letras_a_usar)
+letras_validadas = letras_disponibles(letras)
