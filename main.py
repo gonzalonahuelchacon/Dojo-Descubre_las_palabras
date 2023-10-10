@@ -72,6 +72,7 @@ while running:
     # Muestra el tiempo restante
     tiempo_surface = font.render(f"Tiempo restante: {tiempo_restante}", True, texto_color)
     screen.blit(tiempo_surface, (10, 100))
+    #Muestra el puntaje
     puntaje = font.render(f"Puntuación:{acumulador}",True,texto_color)
     screen.blit(puntaje,(10,150))
     # Muestra las palabras escritas
