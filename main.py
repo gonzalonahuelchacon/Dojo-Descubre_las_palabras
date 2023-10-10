@@ -1,31 +1,10 @@
 import pygame, sys
 from funciones import *
 
-key = elegir_key(crear_lista_claves(lista_palabras))
-letras = mezclar_palabra(key)
-letras_a_usar = letras_disponibles(letras)
-letras_str = str(letras_a_usar)
-
-
 pygame.init()
 
-NEGRO = (0, 0, 0)
-BLANCO = (255, 255, 255)
-width, height = 900, 600
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Descubre las palabras")
-
 font = pygame.font.Font(None, 36)
-texto = ""
-texto_color = NEGRO
-maximo = 10
-letras_validadas = letras_disponibles(letras)
-palabras_escritas = []
-running = True
 tiempo = pygame.time.Clock()
-tiempo_restante = 9000
-acumulador=0
-
 
 while running:
     for event in pygame.event.get():
@@ -39,8 +18,7 @@ while running:
                     if texto not in palabras_escritas:
                         palabras_escritas.append(texto)
                         acumulador+=5
-                    
-                    
+                                       
                 texto = ""
             else:
                 if len(texto) < maximo:
@@ -60,7 +38,6 @@ while running:
                             palabras_escritas.add(texto)  # Agrega la palabra al conjunto
                             acumulador += 5  # Aumenta el acumulador en 5
                     texto = ""
-
 
     screen.fill(BLANCO)
     #Muestra las letras a usar
@@ -89,7 +66,6 @@ while running:
 
     tiempo.tick(60)
 print(f"El puntaje obtenido es: {acumulador}")
-
 pygame.quit()
 sys.exit() 
 
