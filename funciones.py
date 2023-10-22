@@ -1,26 +1,49 @@
 from data import lista_palabras
 import random, pygame
 
+#Colores
 NEGRO = (0, 0, 0)
 BLANCO = (255, 255, 255)
 
-width, height = 900, 600
+#Pantalla
+width, height = 1600, 900
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Descubre las palabras")
 
+#Fps
+tiempo = pygame.time.Clock()
+FPS = 30
+
+#Tiempo
+tiempo_inicial = pygame.time.get_ticks()
+duracion = 90000
+
+#Fondo e icono
+fondo = pygame.image.load(r"Imagenes\fondo.jpg")
+fondo = pygame.transform.scale(fondo,(width ,height))
+icono = pygame.image.load(r"Imagenes\icono.png")
+pygame.display.set_icon(icono)
+
+#Texto
 texto = ""
-texto_color = NEGRO
-maximo = 10
+texto_color = BLANCO
+
+#largo de palabras
+maximo = 10 
+
+#Palbaras escritas por el usuario
 palabras_escritas = []
-running = True
-tiempo_restante = 9000
-acumulador=0
+
+#Claves
+lista_clave = ["mares","relojeria","milanesa","floresta"]
+
+#Puntuacion
+acumulador = 0
+def elegir_key(claves:list):  
+    return random.choice(claves)
 
 def mezclar_palabra(letras:str):
-    '''
-    Mezcla las letras
-
-    '''
+    
     retorno = False
     if len(letras) > 0:
         lista_letras = list(letras)
@@ -30,44 +53,8 @@ def mezclar_palabra(letras:str):
 
     return retorno
 
-
-def elegir_key(claves:list):
-    """recibe una lista de claves y devuelve una al azar
-
-    Args:
-        palabras (list): lista de palabras
-
-    Returns:
-        _type_: False en caso de que la lista este vacia, sino retorna una key al azar
-    """
-    return random.choice(claves)
-
-def crear_lista_claves(lista:list):
-    """recibe la lista de las palabras y retorna una lista con las key 
-
-    Args:
-        lista (list): lista de las palabras
-
-    Returns:
-        _type_: False en caso de que la lista este vacia, sino retorna una lista con todas las key
-    """
-    retorno = False
-    if len(lista) > 0:
-        lista_claves = []
-        for claves in lista:
-            lista_claves.append(claves)
-        retorno = lista_claves
-    return retorno
-
 def letras_disponibles(palabra):
-    """recibe una serie de letras la mete en una lista y crea un set de la misma
-
-    Args:
-        palabra (_type_): letras a settear
-
-    Returns:
-        _type_: False en caso de que la palabra este vacia, sino devuelve una lista seteada de las letras de ese palabra
-    """
+    
     retorno = False
     if len(palabra) > 0:
         lista_letras = []
@@ -77,27 +64,24 @@ def letras_disponibles(palabra):
         retorno = letras_disponibles
     return retorno
 
-def pedir_letras(letras_disponible:set):
-    letra = input("Ingrese letra: ")
-    
 def mostrar_botones(screen):
-    shuffle_button = pygame.draw.rect(screen, BLANCO, (700, 10, 80, 30))
-    clear_button = pygame.draw.rect(screen, BLANCO, (700, 50, 80, 30))
-    submit_button = pygame.draw.rect(screen, BLANCO, (700, 90, 80, 30))
+    shuffle_button = pygame.draw.rect(screen, BLANCO, (1300, 395, 100, 35))
+    clear_button = pygame.draw.rect(screen, BLANCO, (1300, 495, 100, 35))
+    submit_button = pygame.draw.rect(screen, BLANCO, (1300, 545, 100, 35))
 
-    font = pygame.font.Font(None, 24)
+    font = pygame.font.Font(None, 34)
     shuffle_text = font.render("Shuffle", True, NEGRO)
     clear_text = font.render("Clear", True, NEGRO)
     submit_text = font.render("Submit", True, NEGRO)
 
-    screen.blit(shuffle_text, (715, 15))
-    screen.blit(clear_text, (715, 55))
-    screen.blit(submit_text, (715, 95))
+    screen.blit(shuffle_text, (1315, 400))
+    screen.blit(clear_text, (1315, 500))
+    screen.blit(submit_text, (1315, 550))
 
     return shuffle_button, clear_button, submit_button
 
-key = elegir_key(crear_lista_claves(lista_palabras))
+key = elegir_key(lista_clave)
 letras = mezclar_palabra(key)
 letras_a_usar = letras_disponibles(letras)
 letras_str = str(letras_a_usar)
-letras_validadas = letras_disponibles(letras)
+
